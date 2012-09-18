@@ -34,6 +34,11 @@
         <version>2.4.2</version>
     </dependency>
     <dependency>
+      <groupId>br.com.caelum.vraptor</groupId>
+      <artifactId>vraptor-environment</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+    <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-web-api</artifactId>
       <version>6.0</version>

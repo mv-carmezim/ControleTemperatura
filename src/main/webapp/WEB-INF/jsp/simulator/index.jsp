@@ -19,10 +19,20 @@
                     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
                 };
                 
+                function isNumber(n) {
+                    return !isNaN(parseFloat(n)) && isFinite(n);
+                }
+
+                
                 $("#simulatorForm").submit(function(){
+                    if(!isNumber($("#climate").val()) || !isNumber($("#timer").val())){
+                        alert("Temperatura e tempo devem ser números");
+                        return false;
+                    }
+                    
                     $("#totalCost").html("R$ ...");
                     
-                    $.post('/simulator.json', {
+                    $.post('<c:url value="/simulator.json"/>', {
                         'params.duration': $("#timer").val(),
                         'desiredTemperature': $("#amount").val(),
                         'currentTemperature': $("#climate").val()

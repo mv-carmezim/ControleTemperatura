@@ -14,6 +14,18 @@
         
         <script type="text/javascript">
             $(function() {
+                $("#simulatorForm").submit(function(){
+                    $.post('/simulator', {
+                        'params.duration': $("#timer").val(),
+                        'desiredTemperature': $("#amount").val(),
+                        'currentTemperature': $("#climate").val()
+                    }, function(retorno){
+                        console.log(retorno);
+                    }, 'json');
+                    
+                    return false;
+                });
+                
                 $( "#slider-horizontal" ).slider({
                     orientation: "horizontal",
                     range: "min",
@@ -49,20 +61,16 @@
     <body>
         <h1 class="mainTitle">Regular temperatura</h1>
         
-        ${errors}1
-        ${message}2
-        ${messages}3
-        
-        <form action="/" method="post" class="simulatorForm">
+        <form action="/simulator" method="post" class="simulatorForm" id="simulatorForm">
             <p>
                 <label for="climate">temp. ambiente</label>
-                <input type="text" id="climate" name="" value="10" />
+                <input type="text" id="climate" name="currentTemperature" value="10" />
                 ºC
             </p>
             
             <p>
                 <label for="timer"> tempo </label>
-                <input type="text" id="timer" name="" value="10" />
+                <input type="text" id="timer" name="params.duration" value="10" />
                 min
             </p>
             
@@ -70,7 +78,7 @@
                 <label for="maxClimate">temp. m&aacute;xima</label>
                 
                 <span style="display: none;">
-                    <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;" />
+                    <input type="text" id="amount" name="desiredTemperature" style="border:0; color:#f6931f; font-weight:bold;" />
                 </span>
 
                 <span class="temperatureRage">10ºC</span>

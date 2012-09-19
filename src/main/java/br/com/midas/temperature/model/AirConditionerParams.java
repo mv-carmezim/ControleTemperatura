@@ -1,31 +1,40 @@
 package br.com.midas.temperature.model;
 
-import br.com.caelum.vraptor.environment.Environment;
 import java.math.BigDecimal;
 
 public class AirConditionerParams {
     
     private Integer duration;
-    
+    private BigDecimal startCost;  // R$
     private BigDecimal freezeCost;  // R$
     private Float temperatureLatency; // °C/min
     private Float humanTemperatureDiference;  // +-x
-    
-    private Environment environment;
 
-    public AirConditionerParams(Environment environment) {
-        this.environment = environment;
-        freezeCost = new BigDecimal( environment.get("freeze.cost") );
-        temperatureLatency = Float.parseFloat( environment.get("temperature.latency") );
-        humanTemperatureDiference = Float.parseFloat( environment.get("human.temperature.diference") );
+    public AirConditionerParams() {
     }
-
+    
+    public AirConditionerParams(Integer duration, BigDecimal startCost, BigDecimal freezeCost, Float temperatureLatency, Float humanTemperatureDiference) {
+        this.duration = duration;
+        this.startCost = startCost;
+        this.freezeCost = freezeCost;
+        this.temperatureLatency = temperatureLatency;
+        this.humanTemperatureDiference = humanTemperatureDiference;
+    }
+    
     public Integer getDuration() {
         return duration;
     }
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public BigDecimal getStartCost() {
+        return startCost;
+    }
+
+    public void setStartCost(BigDecimal startCost) {
+        this.startCost = startCost;
     }
 
     public BigDecimal getFreezeCost() {

@@ -10,6 +10,11 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
         
+    <context-param>
+        <param-name>br.com.caelum.vraptor.environment</param-name>
+        <param-value>globoroom</param-value>
+    </context-param>  
+      
     <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>

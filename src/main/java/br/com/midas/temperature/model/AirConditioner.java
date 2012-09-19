@@ -7,17 +7,17 @@ public class AirConditioner {
     private Float currentTemperature;
     private BigDecimal energyCost;
 
-    public AirConditioner(Float currentTemperature) {
+    public AirConditioner(Float currentTemperature, BigDecimal startCost) {
         this.currentTemperature = currentTemperature;
-        this.energyCost = new BigDecimal(0.5);
+        this.energyCost = startCost;
     }
     
     public void freeze(Float celsius, BigDecimal freezeCost){
         this.currentTemperature -= celsius;
-        energyCost.add(freezeCost);
+        energyCost = energyCost.add(freezeCost.multiply(new BigDecimal(celsius.floatValue())));
     }
     
-    public void warmUp(Float celsius){
+    public void roomWarmedUp(Float celsius){
         this.currentTemperature += celsius;
     }
 

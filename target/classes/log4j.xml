@@ -8,8 +8,15 @@
         </layout>
     </appender>
 
-    <appender name="simulatorAppender" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${com.sun.aas.instanceRoot}/logs/simulator.log" />
+    <appender name="serviceMinuteByMinuteAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${com.sun.aas.instanceRoot}/logs/serviceMinuteByMinute.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss,SSS} %5p [%-20c{1}] %m%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="serviceFormulaAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${com.sun.aas.instanceRoot}/logs/serviceFormula.log" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss,SSS} %5p [%-20c{1}] %m%n"/>
         </layout>
@@ -20,9 +27,14 @@
         <appender-ref ref="main" />
     </category>
 
-    <logger name="simulator">
+    <logger name="serviceMinuteByMinute">
         <level value="all" />
-        <appender-ref ref="simulatorAppender" />
+        <appender-ref ref="serviceMinuteByMinuteAppender" />
+    </logger>
+    
+    <logger name="serviceFormula">
+        <level value="all" />
+        <appender-ref ref="serviceFormulaAppender" />
     </logger>
 
 </log4j:configuration>

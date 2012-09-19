@@ -28,5 +28,17 @@ public class AirConditioner {
     public BigDecimal getEnergyCost() {
         return energyCost;
     }
+
+    public void setCurrentTemperature(Float currentTemperature) {
+        this.currentTemperature = currentTemperature;
+    }
+
+    public void setEnergyCost(BigDecimal energyCost) {
+        this.energyCost = energyCost;
+    }
+    
+    public void addEnergyCost(BigDecimal plus){
+        this.energyCost = this.energyCost.add(plus);
+    }
     
 }

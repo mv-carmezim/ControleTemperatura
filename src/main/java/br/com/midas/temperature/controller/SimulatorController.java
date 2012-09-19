@@ -9,7 +9,8 @@ import br.com.caelum.vraptor.environment.Environment;
 import static br.com.caelum.vraptor.view.Results.*;
 import br.com.midas.temperature.model.AirConditioner;
 import br.com.midas.temperature.model.AirConditionerParams;
-import br.com.midas.temperature.service.AirConditionerService;
+import br.com.midas.temperature.service.ServiceFormulaImpl;
+import br.com.midas.temperature.service.ServiceMinuteByMinute;
 import java.math.BigDecimal;
 
 @Resource
@@ -30,13 +31,13 @@ public class SimulatorController {
     }
     
     @Post("/simulator")
-    public void simulator(Float currentTemperature, Float desiredTemperature, AirConditionerParams params){
+    public void newsimulator(Float currentTemperature, Float desiredTemperature, AirConditionerParams params){
         params.setFreezeCost( new BigDecimal(environment.get("freeze.cost")) );
         params.setStartCost( new BigDecimal(environment.get("start.cost")) );
         params.setTemperatureLatency( Float.parseFloat(environment.get("temperature.latency")) );
         params.setHumanTemperatureDiference( Float.parseFloat(environment.get("human.temperature.diference")) );
         
-        AirConditionerService service = new AirConditionerService();
+        ServiceFormulaImpl service = new ServiceFormulaImpl();
         AirConditioner air = service.freeze(currentTemperature, desiredTemperature, params);
         
         result.use(json()).withoutRoot().from(air).serialize();

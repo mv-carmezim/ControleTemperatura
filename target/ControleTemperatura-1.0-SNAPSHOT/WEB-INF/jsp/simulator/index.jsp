@@ -14,12 +14,20 @@
         
         <script type="text/javascript">
             $(function() {
+                function formatMoney(n, c, d, t){
+                    var c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+                    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+                };
+                
                 $("#simulatorForm").submit(function(){
+                    $("#totalCost").html("R$ ");
+                    
                     $.post('/simulator', {
                         'params.duration': $("#timer").val(),
                         'desiredTemperature': $("#amount").val(),
                         'currentTemperature': $("#climate").val()
                     }, function(retorno){
+                        $("#totalCost").html( "R$ " + formatMoney(retorno.energyCost, 2, ',', '.') );
                         console.log(retorno);
                     }, 'json');
                     
@@ -64,13 +72,13 @@
         <form action="/simulator" method="post" class="simulatorForm" id="simulatorForm">
             <p>
                 <label for="climate">temp. ambiente</label>
-                <input type="text" id="climate" name="currentTemperature" value="10" />
+                <input type="text" id="climate" name="currentTemperature" value="30" />
                 ºC
             </p>
             
             <p>
                 <label for="timer"> tempo </label>
-                <input type="text" id="timer" name="params.duration" value="10" />
+                <input type="text" id="timer" name="params.duration" value="30" />
                 min
             </p>
             
@@ -93,7 +101,7 @@
                 <button type="submit" class="simulatorSubmit">Simular</button>
                 
                 <label> custo </label>
-                <span class="totalCost"> R$ 12,00 </span>
+                <span class="totalCost" id="totalCost"> </span>
             </p>
         </form>
         

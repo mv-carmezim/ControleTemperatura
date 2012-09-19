@@ -20,15 +20,14 @@
                 };
                 
                 $("#simulatorForm").submit(function(){
-                    $("#totalCost").html("R$ ");
+                    $("#totalCost").html("R$ ...");
                     
-                    $.post('/simulator', {
+                    $.post('/simulator.json', {
                         'params.duration': $("#timer").val(),
                         'desiredTemperature': $("#amount").val(),
                         'currentTemperature': $("#climate").val()
                     }, function(retorno){
                         $("#totalCost").html( "R$ " + formatMoney(retorno.energyCost, 2, ',', '.') );
-                        console.log(retorno);
                     }, 'json');
                     
                     return false;

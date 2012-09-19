@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 
 public final class ServiceFormulaImpl implements AirConditionerService{
 
-    Logger logger = Logger.getLogger("serviceFormula");
+    private Logger logger = Logger.getLogger("serviceFormula");
 
     public ServiceFormulaImpl() {
         logger.info("Conectando-se ao hardware do ar condicionado");

@@ -1,6 +1,7 @@
 package br.com.midas.temperature.model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class AirConditioner {
     
@@ -39,6 +40,32 @@ public class AirConditioner {
     
     public void addEnergyCost(BigDecimal plus){
         this.energyCost = this.energyCost.add(plus);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AirConditioner other = (AirConditioner) obj;
+        if (!Objects.equals(this.currentTemperature, other.currentTemperature)) {
+            return false;
+        }
+        if (!Objects.equals(this.energyCost.floatValue(), other.energyCost.floatValue())) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.currentTemperature);
+        hash = 97 * hash + Objects.hashCode(this.energyCost);
+        return hash;
     }
     
 }

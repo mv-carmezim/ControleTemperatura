@@ -12,12 +12,12 @@
         <decorator:head />
     </head>
     <body class="container">
-        <header class="centralize">&nbsp;</header>
+        <header class="header centralize">&nbsp;</header>
         
         <section class="mainContent centralize">
             <decorator:body />
         </section>
 
-        <footer class="centralize">&nbsp;</footer>
+        <footer class="footer centralize">&nbsp;</footer>
     </body>
 </html>

@@ -1,16 +1,11 @@
 package br.com.midas.temperature.controller;
 
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Resource;
-import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.environment.Environment;
-import static br.com.caelum.vraptor.view.Results.*;
+import static br.com.caelum.vraptor.view.Results.json;
 import br.com.midas.temperature.model.AirConditioner;
 import br.com.midas.temperature.model.AirConditionerParams;
 import br.com.midas.temperature.service.ServiceFormulaImpl;
-import br.com.midas.temperature.service.ServiceMinuteByMinute;
 import java.math.BigDecimal;
 
 @Resource
@@ -30,7 +25,7 @@ public class SimulatorController {
     public void index(){
     }
     
-    @Post("/simulator")
+    @Post("/simulator.json")
     public void newsimulator(Float currentTemperature, Float desiredTemperature, AirConditionerParams params){
         params.setFreezeCost( new BigDecimal(environment.get("freeze.cost")) );
         params.setStartCost( new BigDecimal(environment.get("start.cost")) );
